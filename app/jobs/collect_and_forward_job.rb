@@ -15,8 +15,7 @@ class CollectAndForwardJob < ApplicationJob
   def process_and_forward_json_object(j)
     ['tok', 'lan', 'gra', 'fra', 'bhs', 'sin', 'mia', 'syd'].each do |z|
       timing_value = j[z]["timings"]["total"]
-      puts "#{z}, #{timing_value}"
-      puts "Reporting..."
+      puts "Reporting: Zone #{z} has value: #{timing_value}"
       Keen.publish(:response_times, {
         :location => z,
         :value => timing_value
