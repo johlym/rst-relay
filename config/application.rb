@@ -18,5 +18,9 @@ module ResponseTimes
     config.updownio = {
       token: 'c2ry',
     }
+    config.hg = {
+      key: '2ef65f36-c77e-4024-a895-d486fd7c11f2',
+      destination: '3de08a3c.carbon.hostedgraphite.com'
+    }
   end
 end
