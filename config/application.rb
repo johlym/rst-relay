@@ -20,7 +20,8 @@ module ResponseTimes
     }
     config.hg = {
       key: '2ef65f36-c77e-4024-a895-d486fd7c11f2',
-      destination: '3de08a3c.carbon.hostedgraphite.com'
+      destination: '3de08a3c.carbon.hostedgraphite.com',
+      port: '2003'
     }
   end
 end
