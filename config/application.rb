@@ -26,7 +26,7 @@ module ResponseTimes
     }
 
     config.old_samples_job = {
-      max_age: 14
+      max_age: 5
     }
   end
 end
