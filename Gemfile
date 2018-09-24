@@ -20,7 +20,7 @@ gem 'updown'
 gem 'keen'
 gem 'sidekiq'
 gem "simple_scheduler"
-
+gem 'rollbar'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks

@@ -1,6 +1,7 @@
 require 'socket'
 
 class CollectAndForwardJob < ApplicationJob
+  include Rollbar::ActiveJob
   queue_as :default
 
   def perform(*args)
