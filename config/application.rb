@@ -24,5 +24,9 @@ module ResponseTimes
       destination: '3de08a3c.carbon.hostedgraphite.com',
       port: '2003'
     }
+
+    config.old_samples_job = {
+      max_age: 14
+    }
   end
 end
