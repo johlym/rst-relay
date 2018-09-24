@@ -1,0 +1,2 @@
+module TimeSampleHelper
+end

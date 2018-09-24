@@ -1,0 +1,6 @@
+<h1>Time Samples</h1>
+<ul>
+<% @recent_sample.each do |s| %>
+  <li><%= s.location %>: <%= s.value %></li>
+<% end %>
+</ul>

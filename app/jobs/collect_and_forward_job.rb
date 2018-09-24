@@ -21,7 +21,16 @@ class CollectAndForwardJob < ApplicationJob
       zone = z[0]
       timing = z[1]['timings']['total']
       conn.puts "#{hg[:key]}.response_times.#{zone} #{timing}\n"
+      save_event_to_database(zone, timing)
     end
     conn.close
+  end
+
+  def save_event_to_database(zone, timing)
+    ts = TimeSample.new
+    ts.location = zone
+    ts.value = timing
+    ts.save!
+    return
   end
 end
