@@ -7,3 +7,7 @@ tz: "America/Chicago" # The application time zone will be used by default if not
 collect_and_forward_task:
   class: "CollectAndForwardJob"
   every: "5.minutes"
+
+cleanup_task:
+  class: "RemoveOldSamples"
+  every: "1.day"
