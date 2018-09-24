@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-
   root 'welcome#index'
 
-  get 'sample', to: 'time_sample#index'
+  namespace :admin do
+      resources :time_samples, path: "samples"
+
+      root to: "time_samples#index"
+    end
+
+  # get 'sample', to: 'time_sample#index'
 
   # Sidekiq
   require "sidekiq/web"
