@@ -5,28 +5,40 @@ class CollectAndForwardJob < ApplicationJob
   queue_as :default
 
   def perform(*args)
-    logger.tagged("CollectAndForward") do
-      ud = Rails.configuration.updownio
-      logger.info("Attempting check...")
+    ud = Rails.configuration.updownio
+    logger.info("Attempting check...")
+    begin
       check = Updown::Check.get ud[:token], metrics: true
-      
       reply = check.get_metrics group: :host, from: 1.hour.ago
       process_and_forward_json_object(reply)
-      logger.info("Check done.")
+    rescue => exception
+      logger.error("Updown check failed: #{exception}")
+    ensure
+      logger.info("Attempt complete.")
     end
   end
 
   def process_and_forward_json_object(j)
     hg = Rails.configuration.hg
-    conn = TCPSocket.new hg[:destination], hg[:port]
-    logger.info("Received #{j.count} samples to report")
-    j.each do |z|
-      zone = z[0]
-      timing = z[1]['timings']['total']
-      conn.puts "#{hg[:key]}.response_times.#{zone} #{timing}\n"
-      save_event_to_database(zone, timing)
+    logger.info("Attempting Process and Forward...")
+    begin
+      conn = TCPSocket.new hg[:destination], hg[:port]
+      logger.info("Received #{j.count} samples to report")
+      j.each do |z|
+        zone = z[0]
+        timing = z[1]['timings']['total']
+        conn.puts "#{hg[:key]}.response_times.#{zone} #{timing}\n"
+        logger.info("Saving to local DB...")
+        save_event_to_database(zone, timing)
+      end
+      conn.close
+    rescue => exception
+      logger.error("Push to HG failed: #{exception}")
+    ensure
+      logger.info("Attempted Process and Forward complete.")
     end
-    conn.close
+    
+    
   end
 
   def save_event_to_database(zone, timing)
