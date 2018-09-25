@@ -1,12 +1,12 @@
 # Global configuration options. The `queue_ahead` and `tz` options can also be set on each task.
-queue_ahead: 9 # Number of minutes to queue jobs into the future
+queue_ahead: 11 # Number of minutes to queue jobs into the future
 queue_name: "default" # The Sidekiq queue name used by SimpleScheduler::FutureJob
 tz: "America/Chicago" # The application time zone will be used by default if not set
 
 # Runs once every 2 minutes
 collect_and_forward_task:
   class: "CollectAndForwardJob"
-  every: "1.minute"
+  every: "5.minute"
 
 cleanup_task:
   class: "RemoveOldSamples"
