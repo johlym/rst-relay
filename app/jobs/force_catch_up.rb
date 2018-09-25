@@ -29,7 +29,7 @@ class ForceCatchUp < ApplicationJob
 
   def candidates_for_deletion
     job_setting = Rails.configuration.force_catch_up
-    results = TimeSample.where('created_at < ?', job_setting[:max_age].days.ago)
+    results = TimeSample.where('created_at < ?', job_setting[:max_age].hours.ago)
     if results.empty?
       nil
     end
