@@ -28,5 +28,8 @@ module ResponseTimes
     config.old_samples_job = {
       max_age: 5
     }
+    config.force_catch_up = {
+      max_age: 1
+    }
   end
 end
