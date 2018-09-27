@@ -17,9 +17,10 @@ gem 'bootsnap', '>= 1.1.0', require: false
 # Added in
 gem 'updown'
 gem 'sidekiq'
-gem "simple_scheduler"
+gem 'simple_scheduler'
 gem 'rollbar'
-gem "administrate"
+gem 'administrate'
+gem 'appoptics_apm'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
